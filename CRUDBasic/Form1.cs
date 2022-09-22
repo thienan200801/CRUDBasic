@@ -59,5 +59,17 @@ namespace CRUDBasic
             FileExplorer f = new FileExplorer();
             f.ShowDialog();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StringHandling stringHandling = new StringHandling();
+            stringHandling.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CRUD crud = new CRUD();
+            crud.ShowDialog();
+        }
     }
 }
