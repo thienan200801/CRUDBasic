@@ -133,7 +133,21 @@ namespace CRUDBasic
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
+            if(sqlCon == null) sqlCon = new SqlConnection();
+            if(sqlCon.State == ConnectionState.Closed) sqlCon.Open();
 
+            SqlCommand sqlCmd = new SqlCommand();
+            sqlCmd.CommandType = CommandType.Text;
+            sqlCmd.CommandText = "delete from VATTU where MAVT = '"+maVT.Text.Trim()+"'";
+
+            sqlCmd.Connection = sqlCon;
+            int result = sqlCmd.ExecuteNonQuery();
+            if (result > 0)
+            {
+                MessageBox.Show("Deleted");
+                DisplayListViewItem();
+            }
+            else MessageBox.Show("Failed to delete");
         }
     }
 }
