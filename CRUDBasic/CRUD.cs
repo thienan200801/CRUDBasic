@@ -80,5 +80,60 @@ namespace CRUDBasic
             }
             else MessageBox.Show("Failed to add");
         }
+
+        private void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            if(sqlCon != null) sqlCon = new SqlConnection(strCon);
+            if(sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "update VATTU set MAVT = '"+maVT.Text+"', TENVT = '"+tenVT.Text+"', DONVITINH = '"+donViTinh.Text+"', PHANTRAM = '"+phanTram.Text+"' where MAVT = '"+maVT.Text+"'";
+            //cmd.CommandText = "update VATTU set MAVT = @maVT, TENVT = @tenVT, DONVITINH = @dvt, PHANTRAM = @phantram where MAVT = @maVT";
+
+            //SqlParameter parMaVT = new SqlParameter("@maVT", SqlDbType.VarChar);
+            //SqlParameter parTenVT = new SqlParameter("@tenVT", SqlDbType.VarChar);
+            //SqlParameter parDonViTinh = new SqlParameter("@dvt", SqlDbType.VarChar);
+            //SqlParameter parPhanTram = new SqlParameter("@phantram", SqlDbType.Real);
+
+            //parMaVT.Value = maVT.Text.Trim();
+            //parTenVT.Value = tenVT.Text.Trim();
+            //parDonViTinh.Value = donViTinh.Text.Trim();
+            //parPhanTram.Value = phanTram.Text.Trim();
+
+            //cmd.Parameters.Add(parMaVT);
+            //cmd.Parameters.Add(parTenVT);
+            //cmd.Parameters.Add(parDonViTinh);
+            //cmd.Parameters.Add(parPhanTram);
+
+            cmd.Connection = sqlCon;
+
+            int result = cmd.ExecuteNonQuery();
+            if (result > 0)
+            {
+                MessageBox.Show("Updated");
+                DisplayListViewItem();
+            }
+            else MessageBox.Show("Failed to update");
+        }
+
+        private void danhSachVT_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (danhSachVT.SelectedItems.Count == 0) return;
+
+            ListViewItem lvi = danhSachVT.SelectedItems[0];
+
+            maVT.Text = lvi.SubItems[0].Text;
+            tenVT.Text = lvi.SubItems[1].Text;
+            donViTinh.Text = lvi.SubItems[2].Text;
+            phanTram.Text = lvi.SubItems[3].Text;
+
+
+        }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

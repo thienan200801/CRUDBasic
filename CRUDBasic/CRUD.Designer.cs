@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.donViTinh = new System.Windows.Forms.TextBox();
@@ -45,6 +46,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.UpdateBtn = new System.Windows.Forms.Button();
+            this.DeleteBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +63,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.DeleteBtn);
+            this.groupBox1.Controls.Add(this.UpdateBtn);
             this.groupBox1.Controls.Add(this.donViTinh);
             this.groupBox1.Controls.Add(this.phanTram);
             this.groupBox1.Controls.Add(this.tenVT);
@@ -106,9 +111,9 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(34, 278);
+            this.addBtn.Location = new System.Drawing.Point(34, 275);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(323, 55);
+            this.addBtn.Size = new System.Drawing.Size(86, 33);
             this.addBtn.TabIndex = 4;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = true;
@@ -170,12 +175,15 @@
             this.danhSachVT.FullRowSelect = true;
             this.danhSachVT.GridLines = true;
             this.danhSachVT.HideSelection = false;
+            this.danhSachVT.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3});
             this.danhSachVT.Location = new System.Drawing.Point(4, 22);
             this.danhSachVT.Name = "danhSachVT";
             this.danhSachVT.Size = new System.Drawing.Size(386, 337);
             this.danhSachVT.TabIndex = 0;
             this.danhSachVT.UseCompatibleStateImageBehavior = false;
             this.danhSachVT.View = System.Windows.Forms.View.Details;
+            this.danhSachVT.SelectedIndexChanged += new System.EventHandler(this.danhSachVT_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -196,6 +204,26 @@
             // 
             this.columnHeader4.Text = "Phan tram";
             this.columnHeader4.Width = 50;
+            // 
+            // UpdateBtn
+            // 
+            this.UpdateBtn.Location = new System.Drawing.Point(154, 275);
+            this.UpdateBtn.Name = "UpdateBtn";
+            this.UpdateBtn.Size = new System.Drawing.Size(86, 33);
+            this.UpdateBtn.TabIndex = 9;
+            this.UpdateBtn.Text = "Update";
+            this.UpdateBtn.UseVisualStyleBackColor = true;
+            this.UpdateBtn.Click += new System.EventHandler(this.UpdateBtn_Click);
+            // 
+            // DeleteBtn
+            // 
+            this.DeleteBtn.Location = new System.Drawing.Point(271, 275);
+            this.DeleteBtn.Name = "DeleteBtn";
+            this.DeleteBtn.Size = new System.Drawing.Size(86, 33);
+            this.DeleteBtn.TabIndex = 10;
+            this.DeleteBtn.Text = "Delete";
+            this.DeleteBtn.UseVisualStyleBackColor = true;
+            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
             // CRUD
             // 
@@ -235,5 +263,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button UpdateBtn;
+        private System.Windows.Forms.Button DeleteBtn;
     }
 }
