@@ -22,16 +22,13 @@ namespace CRUDBasic
 
         private void CRUD_Load(object sender, EventArgs e)
         {
-            ListViewItem();
+            DisplayListViewItem();
         }
 
-        private void ListViewItem()
+        private void DisplayListViewItem()
         {
             if(sqlCon == null) sqlCon = new SqlConnection(strCon);
-            if (sqlCon.State == ConnectionState.Closed)
-            {
-                sqlCon.Open();
-            }
+            if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
 
             SqlCommand sqlCmd = new SqlCommand();
             sqlCmd.CommandType = CommandType.Text; 
@@ -40,6 +37,8 @@ namespace CRUDBasic
             sqlCmd.Connection = sqlCon; //send query to connect
 
             SqlDataReader reader = sqlCmd.ExecuteReader();
+            danhSachVT.Items.Clear();
+
             while (reader.Read())
             {
                 string maVT = reader.GetString(0);
@@ -57,5 +56,29 @@ namespace CRUDBasic
             reader.Close();
         }
 
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            if (sqlCon != null) sqlCon = new SqlConnection(strCon);
+            if(sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+
+            //Get data from textbox
+            string newMaVT = maVT.Text.Trim();
+            string newTenVT = tenVT.Text.Trim();
+            string newDVT = donViTinh.Text.Trim();
+            string newPhanTram = phanTram.Text.Trim();
+
+            SqlCommand sqlCmd = new SqlCommand();
+            sqlCmd.CommandType = CommandType.Text;
+            sqlCmd.CommandText = "insert into VATTU values ('" + newMaVT + "', '" + newTenVT + "', '" + newDVT + "', '" + newPhanTram + "')";
+
+            sqlCmd.Connection = sqlCon;
+            int result = sqlCmd.ExecuteNonQuery();
+            if (result > 0)
+            {
+                MessageBox.Show("Added");
+                DisplayListViewItem();
+            }
+            else MessageBox.Show("Failed to add");
+        }
     }
 }
